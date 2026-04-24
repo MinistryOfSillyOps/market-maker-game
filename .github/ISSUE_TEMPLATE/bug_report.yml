@@ -33,7 +33,7 @@ body:
   - type: textarea
     id: expected
     attributes:
-      label: Expected Behaviour
+      label: Expected Behavior
       description: What should happen instead?
       placeholder: "e.g. Cash should decrease by the ask price × quantity plus fees."
     validations:
@@ -42,7 +42,7 @@ body:
   - type: textarea
     id: actual
     attributes:
-      label: Actual Behaviour
+      label: Actual Behavior
       description: What actually happens? Include any error messages or unexpected output.
       placeholder: |
         Paste terminal output here, e.g.:

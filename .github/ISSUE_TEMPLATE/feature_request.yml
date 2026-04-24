@@ -31,7 +31,7 @@ body:
     attributes:
       label: Proposed Solution
       description: |
-        Describe the behaviour you want, including:
+        Describe the behavior you want, including:
         - New commands or flags (e.g. a new `--difficulty` CLI flag)
         - Changes to game mechanics (e.g. altered spread formula)
         - New output or display elements
@@ -73,7 +73,7 @@ body:
       placeholder: |
         - [ ] `--difficulty easy` sets spread to 0.05 and fee_per_share to 0.02
         - [ ] `--difficulty hard` sets spread to 0.20 and fee_per_share to 0.10
-        - [ ] Default behaviour (no flag) is unchanged
+        - [ ] Default behavior (no flag) is unchanged
         - [ ] Help text (`--help`) documents the new flag
     validations:
       required: true
