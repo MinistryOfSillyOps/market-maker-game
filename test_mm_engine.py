@@ -168,8 +168,9 @@ class TestQuoteGeneration(unittest.TestCase):
         
         bid, ask = build_quotes(snapshot, state, params, 0.0)
         self.assertLess(bid, ask)
-        # Allow for small floating point differences
-        self.assertGreaterEqual(ask - bid, params.tick_size * 0.99)
+        # Allow for floating point tolerance (99% of tick size)
+        FLOAT_TOLERANCE = 0.99
+        self.assertGreaterEqual(ask - bid, params.tick_size * FLOAT_TOLERANCE)
     
     def test_build_quotes_inventory_skew(self):
         """Test quotes adjust for inventory."""

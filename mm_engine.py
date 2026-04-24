@@ -267,11 +267,21 @@ def round_to_tick(price: float, tick_size: float) -> float:
     Returns:
         Price rounded to nearest tick
     """
-    # Use round() with proper decimal places to avoid floating point issues
+    # Round to nearest tick
     ticks = round(price / tick_size)
     result = ticks * tick_size
-    # Round to avoid floating point precision issues
-    decimals = len(str(tick_size).split('.')[-1]) if '.' in str(tick_size) else 0
+    
+    # Determine decimal places for final rounding to avoid floating point issues
+    # We need enough precision to represent the tick_size accurately
+    # For 0.01 -> need 2 decimals, for 0.25 -> need 2 decimals, for 0.001 -> need 3
+    import math
+    if tick_size >= 1:
+        decimals = 0
+    else:
+        # Use 2 + floor(-log10(tick_size)) to ensure sufficient precision
+        # This gives us: 0.25 -> 2, 0.01 -> 2, 0.001 -> 3
+        decimals = 2 + int(math.floor(-math.log10(tick_size)))
+    
     return round(result, decimals)
 
 
@@ -325,8 +335,9 @@ def build_quotes(
     ask = round_to_tick(raw_ask, params.tick_size)
     
     # Prevent crossed quotes (ensure bid < ask by at least 1 tick)
-    # Use a small epsilon for floating point comparison
-    if bid >= ask - params.tick_size * 0.5:
+    # Use epsilon factor for floating point comparison tolerance
+    EPSILON_FACTOR = 0.5  # Half a tick for floating point safety
+    if bid >= ask - params.tick_size * EPSILON_FACTOR:
         bid = round_to_tick(ask - params.tick_size, params.tick_size)
     
     return (bid, ask)
