@@ -1,0 +1,96 @@
+name: Feature Request
+description: Suggest a new feature or improvement for the market-maker game
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a feature! Filling in the details below helps Copilot and contributors understand exactly what to build and how it fits into the existing game.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Feature Summary
+      description: A short, clear description of the feature you'd like added.
+      placeholder: "e.g. Add a leaderboard that persists top scores between sessions."
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation / Problem Statement
+      description: Why is this feature needed? What problem does it solve or what experience does it improve?
+      placeholder: "e.g. Currently there is no way to compare runs across sessions, which reduces replayability."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: Proposed Solution
+      description: |
+        Describe the behaviour you want, including:
+        - New commands or flags (e.g. a new `--difficulty` CLI flag)
+        - Changes to game mechanics (e.g. altered spread formula)
+        - New output or display elements
+        - New files or modules to add
+      placeholder: |
+        e.g.
+        - Add a `--difficulty {easy,normal,hard}` CLI flag to `build_parser()`.
+        - Easy: spread = 0.05, fee = 0.02
+        - Normal: current defaults
+        - Hard: spread = 0.20, fee = 0.10
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected Area
+      description: Which part of the codebase would this feature primarily touch?
+      options:
+        - Game configuration (GameConfig)
+        - Game state / mechanics (GameState, next_price)
+        - Trade execution (apply_trade)
+        - Input parsing (parse_action)
+        - Liquidation logic (force_liquidate)
+        - Display / formatting (print_status, print_help)
+        - CLI arguments (build_parser, main)
+        - New module / file
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance Criteria
+      description: |
+        List the specific, testable conditions that must be true for this feature to be considered complete.
+        Use checkboxes so Copilot can track progress.
+      placeholder: |
+        - [ ] `--difficulty easy` sets spread to 0.05 and fee_per_share to 0.02
+        - [ ] `--difficulty hard` sets spread to 0.20 and fee_per_share to 0.10
+        - [ ] Default behaviour (no flag) is unchanged
+        - [ ] Help text (`--help`) documents the new flag
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Any other approaches you considered and why you rejected them.
+      placeholder: "e.g. A separate config file was considered but a CLI flag keeps things simpler."
+    validations:
+      required: false
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Additional Context
+      description: Any other context, mockups, or references that would help with implementation.
+    validations:
+      required: false
